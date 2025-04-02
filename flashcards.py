@@ -20,6 +20,8 @@ with open("flashcards.json", "w") as file:
 mode = input("Are you a teacher or a student? Please type 'T' or 'S'): ").lower()
 teacher = 0
 student = 0
+correct = 0
+streak = 0
 if mode in "t":
     teacher += 1
     print("Teacher Mode enabled.")
@@ -63,5 +65,11 @@ while student:
         answer = input(f"What is the definition of {flashcard['key']}? ")
         if answer == flashcard['value']:
             print("Correct!")
+            correct = correct + 1
+            print(f"So far, you have gotten {correct} questions correct!")
+            streak = streak + 1
+            print(f"Your current streak is {streak} questions correct! Keep it up, bozo!")
         else:
             print(f"Incorrect! The correct answer is {flashcard['value']}.")
+            print(f"Streak of {streak} has been broken!")
+            streak = 0
