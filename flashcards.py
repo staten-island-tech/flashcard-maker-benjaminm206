@@ -9,7 +9,6 @@ class Flashcard:
         return {"key": self.key, "value": self.value}
     
 flashcards = [
-    Flashcard("key", "value")
 ]
 
 flashcards_data = [flashcard.to_dict() for flashcard in flashcards]
@@ -22,6 +21,7 @@ teacher = 0
 student = 0
 correct = 0
 streak = 0
+score = 0
 if mode in "t":
     teacher += 1
     print("Teacher Mode enabled.")
@@ -66,10 +66,16 @@ while student:
         if answer == flashcard['value']:
             print("Correct!")
             correct = correct + 1
-            print(f"So far, you have gotten {correct} questions correct!")
+            score = score + 10
+            print(f"Questions correct: {correct}")
             streak = streak + 1
-            print(f"Your current streak is {streak} questions correct! Keep it up, bozo!")
+            if streak > 1:
+                print(f"Score streak bonus: +{streak * 2}")
+                score = score + streak * 2
+            print(f"Score: {score}")
+            print(f"Streak:{streak}")
         else:
-            print(f"Incorrect! The correct answer is {flashcard['value']}.")
-            print(f"Streak of {streak} has been broken!")
+            print(f"Incorrect! The correct answer is ''{flashcard['value']}''.")
+            if streak > 0:
+                print(f"Streak of {streak} has been broken!")
             streak = 0
